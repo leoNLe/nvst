@@ -23,14 +23,14 @@ module.exports = (Sequelize, DataTypes) => {
   Transactions.associate = models => {
     Transactions.belongsTo(models.Users, {
       foreignKey: {
-        name: "user_id",
+        name: "userId",
         allowNull: false
       }
     });
 
     Transactions.belongsTo(models.Stocks, {
       foreignKey: {
-        name: "stock_id",
+        name: "stockId",
         allowNull: false
       }
     });

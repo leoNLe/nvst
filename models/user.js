@@ -20,13 +20,13 @@ module.exports = (Sequelize, DataTypes) => {
   Users.associate = models => {
     Users.hasMany(models.Transactions, {
       foreignKey: {
-        name: "user_id"
+        name: "userId"
       },
       allowNull: false
     });
     Users.hasMany(models.EndDayBalances, {
       foreignKey: {
-        name: "user_id"
+        name: "userId"
       },
       allowNull: false
     });

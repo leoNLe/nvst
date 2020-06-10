@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
   EndDayBalances.associate = models => {
     EndDayBalances.belongsTo(models.Users, {
       foreignKey: {
-        name: "user_id"
+        name: "userId"
       }
     });
   };
