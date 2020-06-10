@@ -29,7 +29,7 @@ module.exports = (Sequelize, DataTypes) => {
         name: "user_id"
       },
       allowNull: false
-      });
+    });
   };
   return Users;
 };
