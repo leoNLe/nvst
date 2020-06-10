@@ -5,17 +5,18 @@ module.exports = (sequelize, DataTypes)=>  {
       allowNull: false
     },
     symbol: {
-        type: DataTypes.STRING,
-        allowNull: false
-      }
-    })
-  Stock.associate = (models) => {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  });
+
+  Stock.associate = models => {
     Stock.hasMany(models.EndDayBalances, {
       foreignKey: {
         name: "stock_id",
         allowNull: false
       }
     });
-  }
+  };
   return Stock
-}
+};

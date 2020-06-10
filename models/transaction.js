@@ -1,40 +1,40 @@
-module.exports = (Sequelize, DataTypes)=> {
+module.exports = (Sequelize, DataTypes) => {
   const Transactions = Sequelize.define("Transactions", {
-    purchase_price: {
+    purchasePrice: {
       type: DataTypes.DECIMAL,
       allowNull: false
     },
-    stock_symbol: {
+    stockSymbol: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1,4]
+        len : [1,4]
       }
     },
-    sold_price: {
+    soldPrice: {
       type: DataTypes.DECIMAL,
       default: null
     },
     quality: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: false
     }
   });
   
   Transactions.associate = (models) => {
     Transactions.belongsTo(models.Users,{
       foreignKey: {
-       name: "user_id",
-       allowNull: false
+        name: "user_id",
+        allowNull: false
       }
     });
 
     Transactions.belongsTo(models.Stocks,{
       foreignKey: {
-       name: "stock_id",
-       allowNull: false
+        name: "stock_id",
+        allowNull: false
       }
     });
   };
   return Transactions;
-}
+};

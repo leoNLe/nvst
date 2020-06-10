@@ -6,16 +6,16 @@ module.exports = (sequelize, DataTypes) => {
     },
     date: {
       type: DataTypes.DATEONLY,
-      allowNull: false,
+      allowNull: false
     }
   });
 
-  EndDayBalances.associate = (models) => {
+  EndDayBalances.associate = models => {
     EndDayBalances.belongsTo(models.Users, {
       foreignKey: {
         name: "user_id"
       }
-    })
+    });
   };
   return EndDayBalances;
-}
+};
