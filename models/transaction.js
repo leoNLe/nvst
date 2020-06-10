@@ -8,7 +8,7 @@ module.exports = (Sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1, 4 ]
+        len: [1, 4]
       }
     },
     soldPrice: {
