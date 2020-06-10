@@ -8,7 +8,7 @@ module.exports = (Sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1, 4],
+        len: [1, 4]
       },
     },
     soldPrice: {
@@ -21,14 +21,14 @@ module.exports = (Sequelize, DataTypes) => {
     },
   });
   Transactions.associate = models => {
-    Transactions.belongsTo(models.Users, {
+    Transactions.belongsTo( models.Users, {
       foreignKey: {
         name: "user_id",
         allowNull: false,
       },
     });
 
-    Transactions.belongsTo(models.Stocks, {
+    Transactions.belongsTo( models.Stocks, {
       foreignKey: {
         name: "stock_id",
         allowNull: false,
