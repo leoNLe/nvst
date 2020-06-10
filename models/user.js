@@ -1,12 +1,12 @@
 module.exports = (Sequelize, DataTypes) => {
-  const Users  = Sequelize.define("Users", {
+  const Users = Sequelize.define("Users", {
     lastName: {
       type: DataTypes.STRING,
-      allowNull : false 
-    }, 
-    firstName: { 
-      type: DataTypes.STRING, 
-      allowNull: false 
+      allowNull: false
+    },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: false
     },
     email: {
       type: DataTypes.STRING,
@@ -24,12 +24,12 @@ module.exports = (Sequelize, DataTypes) => {
       },
       allowNull: false
     });
-		Users.hasMany(models.EndDayBalances, {
-			foreignKey: {
-				name: "user_id"
-			},
-			allowNull: false
-		});
-  }
+    Users.hasMany(models.EndDayBalances, {
+      foreignKey: {
+        name: "user_id"
+      },
+      allowNull: false
+      });
+  };
   return Users;
 };
