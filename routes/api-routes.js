@@ -1,6 +1,13 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
+const util = require("util");
+const finnhub = require("finnhub");
+
+const defaultClient = finnhub.ApiClient.instance;
+const api_key = defaultClient.authentications["api_key"];
+api_key.apiKey = "brcsl7nrh5rfdvppg6q0"; // get from https://finnhub.io/
+const api = new finnhub.DefaultApi();
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -14,6 +21,48 @@ module.exports = function(app) {
     });
   });
 
+
+  // Company News
+ /* api.companyNews("AAPL", "2020-01-01", "2020-05-01", (error, data, response) => {
+    if (error) {
+        console.error(error);
+    } else {
+        console.log(util.inspect(data, false, null, true))
+    }
+});*/
+
+/*const quotes = {
+  
+}
+
+  api.quote("AAPL", "D", quotes, (err, data, response) => {
+    if (error) {
+      console.log(error);
+  } else {
+      console.log(util.inspect(data, false, true, null));
+    }
+  }); */
+
+  api.stockSymbols("APPLE", "DISNEY", (error, data, response) => {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log(util.inspect(data, false, null, true));
+    }
+});
+
+  // Stock Candles
+  const stockCandlesOpts = {
+    from: 1572651390,
+    to: 1575243390
+  };
+  api.stockCandles("AAPL", "D", stockCandlesOpts, (error, data, response) => {
+    if (error) {
+      console.error(error);
+    } else {
+      console.log(util.inspect(data, false, null, true));
+    }
+  });
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
