@@ -4,18 +4,18 @@ module.exports = (Sequelize, DataTypes) => {
       type: DataTypes.DECIMAL,
       allowNull: false
     },
-    stockSymbol: {
+    symbol: {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [1, 4]
+        len: [1]
       }
     },
     soldPrice: {
       type: DataTypes.DECIMAL,
       default: null
     },
-    quality: {
+    quantity: {
       type: DataTypes.INTEGER,
       allowNull: false
     }
@@ -30,7 +30,7 @@ module.exports = (Sequelize, DataTypes) => {
 
     Transactions.belongsTo(models.Stocks, {
       foreignKey: {
-        name: "stockId",
+        name: "symbol",
         allowNull: false
       }
     });
