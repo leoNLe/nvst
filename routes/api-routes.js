@@ -14,7 +14,7 @@ module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
   // If the user has valid login credentials, send them to the members page.
   // Otherwise the user will be sent an error
-  app.post("/api/login", passport.authenticate("local"), (req, res) => {
+  app.post("/login", passport.authenticate("local"), (req, res) => {
     // Sending back a password, even a hashed password, isn't a good idea
     res.json({
       email: req.user.email,
@@ -22,9 +22,8 @@ module.exports = function(app) {
     });
   });
 
-
   // Company News
- /* api.companyNews("AAPL", "2020-01-01", "2020-05-01", (error, data, response) => {
+  /* api.companyNews("AAPL", "2020-01-01", "2020-05-01", (error, data, response) => {
     if (error) {
         console.error(error);
     } else {
@@ -32,7 +31,7 @@ module.exports = function(app) {
     }
 });*/
 
-/*const quotes = {
+  /*const quotes = {
   
 }
 
@@ -44,7 +43,7 @@ module.exports = function(app) {
     }
   }); */
 
- /* api.stockSymbols("APPLE", "DISNEY", (error, data, response) => {
+  /* api.stockSymbols("APPLE", "DISNEY", (error, data, response) => {
     if (error) {
       console.log(error);
     } else {
@@ -63,7 +62,7 @@ module.exports = function(app) {
     } else {
       console.log(util.inspect(data, false, null, true));
     }
-  });
+  });*/
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
@@ -81,7 +80,7 @@ module.exports = function(app) {
   });
 
   // Route for logging user out
-  app.get("/logout", (req, res) => {
+  app.get("/api/logout", (req, res) => {
     req.logout();
     res.redirect("/");
   });
@@ -99,6 +98,5 @@ module.exports = function(app) {
         id: req.user.id
       });
     }
-  });*/
+  });
 };
-
