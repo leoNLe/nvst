@@ -4,10 +4,11 @@ const passport = require("../config/passport");
 const util = require("util");
 const finnhub = require("finnhub");
 
-const defaultClient = finnhub.ApiClient.instance;
+/*const defaultClient = finnhub.ApiClient.instance;
 const api_key = defaultClient.authentications["api_key"];
 api_key.apiKey = "brcsl7nrh5rfdvppg6q0"; // get from https://finnhub.io/
 const api = new finnhub.DefaultApi();
+*/
 
 module.exports = function(app) {
   // Using the passport.authenticate middleware with our local strategy.
@@ -43,7 +44,7 @@ module.exports = function(app) {
     }
   }); */
 
-  api.stockSymbols("APPLE", "DISNEY", (error, data, response) => {
+ /* api.stockSymbols("APPLE", "DISNEY", (error, data, response) => {
     if (error) {
       console.log(error);
     } else {
@@ -98,5 +99,6 @@ module.exports = function(app) {
         id: req.user.id
       });
     }
-  });
+  });*/
 };
+

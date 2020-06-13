@@ -4,7 +4,7 @@ const bcrypt = require("bcrypt");
 const sequelize = new Sequelize("stocks", "root", "mixVok-quxsy0-sinmup", {
   host: "localhost",
   port: 3306,
-  dialect: "mysql2",
+  dialect: "mysql",
   pool: {
     max: 5,
     min: 0,
@@ -14,7 +14,7 @@ const sequelize = new Sequelize("stocks", "root", "mixVok-quxsy0-sinmup", {
   operatorsAliases: false
 });
 
-const Users = sequelize.define("users", {
+const User = sequelize.define("users", {
   id: {
     type: Sequelize.INTEGER,
     unique: true,
@@ -33,15 +33,19 @@ const Users = sequelize.define("users", {
   email: {
     type: Sequelize.STRING,
     allowNull: false
+  },
+  password: {
+    type: Sequelize.STRING,
+    allowNull: false
   }
 });
 
-Users.beforeCreate((user, options) => {
+User.beforeCreate((user, options) => {
   const cats = bcrypt.genCatsSync();
   user.password = bcrypt.hashSync(user.password, cats);
 });
 
-Users.prototype.validPassword = function(password) {
+User.prototype.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
 
