@@ -1,42 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Account Setting</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
-    <link href="stylesheets/style.css" rel="stylesheet" />
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Account Setting</title>
+        <!-- Font Awesome -->
+        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <!-- Bootstrap -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+        <link href="stylesheets/style.css" rel="stylesheet" />
+
+        <!-- Google Font: Source Sans Pro -->
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Tangerine">
+          <!-- Theme style -->
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css" integrity="sha256-e6m1bynxLVxZVbcvJiDKuKgUb19u0sDT9PIdJjLqr0E=" crossorigin="anonymous" />
+       
+    </head>
 
 <body>
     <header>
-        <nav class="navbar navbar-light bg-light">
-            <form class="form-inline">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search For Stock" aria-label="Search">
-                <button class="search btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form>
-            <form class="form-inline">
-                <a class="navbar-brand" href="index.html">
-                    Home
-                  </a>
-            </form>
+        <nav
+          class="main-header navbar navbar-expand navbar-white navbar-light"
+          style="margin-left: 0px;"
+        >
+          <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+              <span class="navbar-brand">NVST</span>
+            </div>
+          </form>
+    
+          <!-- Right navbar links -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="index.html" role="button">
+                Home <i class="fa fa-home"></i>
+              </a>
+            </li>
+          </ul>
         </nav>
-    </header>
+        <!-- /.navbar -->
+      </header>
 
     <div class="container">
         <div class="row">
             <div class="col-md-6 col-md-offset-3">
-                <h2>Change your Account settings</h2>
-                <form class="signup">
+                <br>
+                <h2>Change Account settings</h2>
+                <form class="account">
                     <div class="form-group">
                         <div class="row">
+                            <div class="col">
                             <div class="col-xs-6"><input type="text" class="form-control" name="first_name"
                                     placeholder="First Name" required="required"></div>
+                            </div>
+                            <div class="col">
                             <div class="col-xs-6"><input type="text" class="form-control" name="last_name"
                                     placeholder="Last Name" required="required"></div>
-                        </div>
+                            </div>
+                            </div>
                     </div>
                     <div class="form-group">
                         <input type="email" class="form-control" name="email" placeholder="Email" required="required">
@@ -60,12 +84,20 @@
             </div>
         </div>
     </div>
-    <footer>
+    <footer style="position: fixed;">
         <div class="footer-copyright text-center text-black-50 py-3">
             © 2020 Copyright: NVST
         </div>
     </footer>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+     <!-- jQuery -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <!-- ChartJS -->
+<!-- <script src="plugins/chart.js/Chart.min.js"></script> -->
+<!-- AdminLTE App -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js" integrity="sha256-qgEvQZWPqqD1J5uCoPAsOZ7kzPmcFpS1AHIU7mowcAE=" crossorigin="anonymous"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/demo.min.js" integrity="sha256-gv3WAOq1lCzyJJF/MEYpFx3DgSMOR5am/g1Eszv2kWw=" crossorigin="anonymous"></script>
+  <!-- page script -->
     <!-- <script type="text/javascript" src="js/login.js"></script> -->
 </body>
 
