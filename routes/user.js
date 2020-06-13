@@ -48,13 +48,14 @@ User.beforeCreate(user => {
 User.prototype.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);
 };
-
-sequelize
+// this will not pass linter, anyway i try it
+/*sequelize
   .sync()
   .then(() => console.log(
-    "users table has been successfully created, if one doesn't exist"
-  )
+      "users table has been successfully created, if one doesn't exist"
+    )
   )
   .catch(error => console.log("This error occured", error));
 
 module.exports = User;
+*/
