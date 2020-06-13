@@ -29,6 +29,7 @@ $(document).ready(() => {
       password: password
     })
       .then(() => {
+        // add if condition for err
         window.location.replace("/portfolio");
         // If there's an error, log the error
       })
