@@ -1,10 +1,10 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const cookieParser = require("cookie-parser");
-const session = require("express-session");
+//const express = require("express");
+//const bodyParser = require("body-parser");
+//const cookieParser = require("cookie-parser");
+//const session = require("express-session");
 const User = require("./models/user");
-const hbs = require("express-handlebars");
-const path = require("path");
+//const hbs = require("express-handlebars");
+//const path = require("path");
 
 module.exports = function(app) {
   //handle bars
