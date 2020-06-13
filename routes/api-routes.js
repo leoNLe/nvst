@@ -71,7 +71,7 @@ module.exports = function(app) {
   ); //change token to personal token
 
   // Connection opened -> Subscribe
-  socket.addEventListener("open", event => {
+  socket.addEventListener("open", () => {
     //for testing purposes
     socket.send(JSON.stringify({ type: "subscribe", symbol: "AAPL" }));
     socket.send(JSON.stringify({ type: "subscribe", symbol: "MSFT" }));
