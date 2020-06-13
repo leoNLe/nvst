@@ -90,13 +90,14 @@ module.exports = function(app) {
     (req, res) => {
       res.render("update", hbsContent);
     },
-      .update({ title: "" }, { _id: 1 })
+    update({ title: "" }, { _id: 1 })
       .success(() => {
         console.log("Password Updated");
       })
       .error(err => {
         console.log(err, "Update failed");
-      }));
+      })
+  );
   // logout
   app.get("/logout", (req, res) => {
     if (req.session.user && req.cookies.user_id) {

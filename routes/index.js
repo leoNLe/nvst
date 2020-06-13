@@ -1,4 +1,4 @@
 exports.index = function(req, res) {
-  let message = "";
+  const message = "";
   res.render("index", { message: message });
 };

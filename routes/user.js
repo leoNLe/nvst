@@ -40,7 +40,7 @@ const User = sequelize.define("users", {
   }
 });
 
-User.beforeCreate((user, options) => {
+User.beforeCreate(user => {
   const cats = bcrypt.genCatsSync();
   user.password = bcrypt.hashSync(user.password, cats);
 });
@@ -52,8 +52,8 @@ User.prototype.validPassword = function(password) {
 sequelize
   .sync()
   .then(() => console.log(
-      "users table has been successfully created, if one doesn't exist"
-    )
+    "users table has been successfully created, if one doesn't exist"
+  )
   )
   .catch(error => console.log("This error occured", error));
 

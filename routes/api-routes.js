@@ -1,8 +1,6 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
 const passport = require("../config/passport");
-const util = require("util");
-const finnhub = require("finnhub");
 
 /*const defaultClient = finnhub.ApiClient.instance;
 const api_key = defaultClient.authentications["api_key"];
@@ -89,10 +87,11 @@ module.exports = function(app) {
   });
 
   // Unsubscribe
-  const unsubscribe = function(symbol) {
+  /*const unsubscribe = function(symbol) {
     // functionality to "sell" needs to be expanded upon currently would just remove from feed
     socket.send(JSON.stringify({ type: "unsubscribe", symbol: symbol }));
   };
+  */
 
   app.post("/api/signup", (req, res) => {
     db.Users.create({
