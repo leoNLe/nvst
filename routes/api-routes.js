@@ -66,15 +66,47 @@ module.exports = function(app) {
   // Route for signing up a user. The user's password is automatically hashed and stored securely thanks to
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
+
+  const WebSocket = require("ws"); //npm i ws
+  const socket = new WebSocket(
+    "wss://ws.finnhub.io?token=brcsl7nrh5rfdvppg6q0"
+  ); //change token to personal token
+
+  // Connection opened -> Subscribe
+  socket.addEventListener("open", event => {
+    //for testing purposes
+    socket.send(JSON.stringify({ type: "subscribe", symbol: "AAPL" }));
+    socket.send(JSON.stringify({ type: "subscribe", symbol: "MSFT" }));
+    socket.send(JSON.stringify({ type: "subscribe", symbol: "AMZN" }));
+    socket.send(JSON.stringify({ type: "subscribe", symbol: "CRON" }));
+    socket.send(JSON.stringify({ type: "subscribe", symbol: "CGC" }));
+  });
+
+  // Listen for messages
+  socket.addEventListener("message", event => {
+    // prints to console
+    console.log("Message from server ", event.data);
+  });
+
+  // Unsubscribe
+  const unsubscribe = function(symbol) {
+    // functionality to "sell" needs to be expanded upon currently would just remove from feed
+    socket.send(JSON.stringify({ type: "unsubscribe", symbol: symbol }));
+  };
+
   app.post("/api/signup", (req, res) => {
-    db.User.create({
+    db.Users.create({
       email: req.body.email,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       password: req.body.password
     })
       .then(() => {
+        console.log("here");
         res.redirect(307, "/api/login");
       })
       .catch(err => {
+        console.log(err);
         res.status(401).json(err);
       });
   });
