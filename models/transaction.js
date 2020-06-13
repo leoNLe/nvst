@@ -1,6 +1,6 @@
 module.exports = (Sequelize, DataTypes) => {
   const Transactions = Sequelize.define("Transactions", {
-    purchasePrice: {
+    price: {
       type: DataTypes.DECIMAL,
       allowNull: false
     },
@@ -17,6 +17,10 @@ module.exports = (Sequelize, DataTypes) => {
     },
     quantity: {
       type: DataTypes.INTEGER,
+      allowNull: false
+    },
+    buy: {
+      type: DataTypes.BOOLEAN,
       allowNull: false
     }
   });

@@ -1,7 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": "mixVok-quxsy0-sinmup",
+    "password": "root",
+    "port": 8889,
     "database": "stocks",
     "host": "127.0.0.1",
     "dialect": "mysql"
