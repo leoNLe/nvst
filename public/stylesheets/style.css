@@ -1,4 +1,39 @@
 form.signup,
-form.login {
-  margin-top: 50px;
+form.login, 
+form.account {
+  margin-top: 30px;
 }
+
+
+#index{
+  background-image: url("../img/index.jpg");
+  background-color: #cccccc;
+  height: 500px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: relative;
+}
+
+.hero-text {
+  text-align: center;
+  position: absolute;
+  padding-top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+footer{
+  
+  bottom: 0;
+  width: 100%; 
+  height: 50px;
+
+ }
+ 

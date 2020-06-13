@@ -1,25 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-  <title>Passport Authentication</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
-  <link href="stylesheets/style.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <!-- Font Awesome -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
+    <link href="stylesheets/style.css" rel="stylesheet" />
+    <link href="stylesheets/watch.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Tangerine">
+      <!-- Theme style -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css" integrity="sha256-e6m1bynxLVxZVbcvJiDKuKgUb19u0sDT9PIdJjLqr0E=" crossorigin="anonymous" />
+   
 </head>
 
+
 <body>
-  <nav class="navbar navbar-default">
-    <div class="container-fluid">
-      <div class="navbar-header">
-      </div>
-    </div>
-  </nav>
+  <header>
+    <nav
+      class="main-header navbar navbar-expand navbar-white navbar-light"
+      style="margin-left: 0px;"
+    >
+      <form class="form-inline ml-3">
+        <div class="input-group input-group-sm">
+          <span class="navbar-brand">NVST</span>
+        </div>
+      </form>
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="index.html" role="button">
+            Home <i class="fa fa-home"></i>
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+  </header>
+</header>
   <div class="container">
+    <br>
     <div class="row">
       <div class="col-md-6 col-md-offset-3">
-        <h2>Login Form</h2>
+        <br>
+        <h2 style="font-size: x-large;">Login Here</h2>
         <form class="login">
           <div class="form-group">
             <label for="exampleInputEmail1">Email address</label>
@@ -34,12 +65,68 @@
         <br />
         <p>Or sign up <a href="/">here</a></p>
       </div>
+
+      <!-- code watch-->
+      <div class="col-md-6">
+        <div class="signboard outer">
+          <div class="signboard front inner anim04c">
+              <li class="year anim04c">
+                  <span></span>
+              </li>
+              <ul class="calendarMain anim04c">
+                  <li class="month anim04c">
+                      <span></span>
+                  </li>
+                  <li class="date anim04c">
+                      <span></span>
+                  </li>
+                  <li class="day anim04c">
+                      <span></span>
+                  </li>
+              </ul>
+              <li class="clock minute anim04c">
+                  <span></span>
+              </li>
+              <li class="calendarNormal date2 anim04c">
+                  <span></span>
+              </li>
+          </div>
+          <div class="signboard left inner anim04c">
+              <li class="clock hour anim04c">
+                  <span></span>
+              </li>
+              <li class="calendarNormal day2 anim04c">
+                  <span></span>
+              </li>
+          </div>
+          <div class="signboard right inner anim04c">
+              <li class="clock second anim04c">
+                  <span></span>
+              </li>
+              <li class="calendarNormal month2 anim04c">
+                  <span></span>
+              </li>
+          </div>
+      </div>
+      </div>
+      <!--ends here-->
     </div>
   </div>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <footer style="position: fixed;">
+    <div class="footer-copyright text-center text-black-50 py-3">
+        © 2020 Copyright: NVST
+    </div>
+</footer>
+ <!-- jQuery -->
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+ <!-- ChartJS -->
+<!-- <script src="plugins/chart.js/Chart.min.js"></script> -->
+<!-- AdminLTE App -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js" integrity="sha256-qgEvQZWPqqD1J5uCoPAsOZ7kzPmcFpS1AHIU7mowcAE=" crossorigin="anonymous"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/demo.min.js" integrity="sha256-gv3WAOq1lCzyJJF/MEYpFx3DgSMOR5am/g1Eszv2kWw=" crossorigin="anonymous"></script>
+  <!-- page script -->
   <script type="text/javascript" src="js/login.js"></script>
-
 </body>
 
 </html>
