@@ -85,11 +85,16 @@ module.exports = function(app) {
     }
   });
   // update
-  app.route("/update").get(
-    sessionChecker,
-    (req, res) => {
+  app.route("/update", (req,res ) => {
+    if (req.session.user && req.cookies.user_id){
+      hbsContent.loggedin = true;
+      hbsContent.username = req.session.user.username;
+      console.log(req.session.username);
+      hbsContent.title = 'Update Password?';
       res.render("update", hbsContent);
-    },
+    } else {
+      res.redirect('/login')
+    }
     update({ title: "" }, { _id: 1 })
       .success(() => {
         console.log("Password Updated");
@@ -97,7 +102,7 @@ module.exports = function(app) {
       .error(err => {
         console.log(err, "Update failed");
       })
-  );
+  ;
   // logout
   app.get("/logout", (req, res) => {
     if (req.session.user && req.cookies.user_id) {
