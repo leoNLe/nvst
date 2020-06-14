@@ -58,7 +58,7 @@ module.exports = function(app) {
         const currentValue = price * dataValues.quantity;
         total += price * dataValues.quantity;
         stocksData.push({
-          name:,
+          name: "placeholder",
           price,
           symbol: dataValues.symbol.toUpperCase(),
           quantity: dataValues.quantity,
