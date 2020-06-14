@@ -1,16 +1,20 @@
 {
   "development": {
     "username": "root",
+<<<<<<< HEAD
+    "password": "mixVok-quxsy0-sinmup",
+=======
     "password": "root",
     "port": 8889,
+>>>>>>> b52b573e810e6077f23434d7e336b59dcf2fbaa7
     "database": "stocks",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
+    "password": "mixVok-quxsy0-sinmup",
+    "database": "stocks",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
