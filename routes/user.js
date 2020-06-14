@@ -41,8 +41,8 @@ const User = sequelize.define("users", {
 });
 
 User.beforeCreate(user => {
-  const cats = bcrypt.genCatsSync();
-  user.password = bcrypt.hashSync(user.password, cats);
+  const salt = bcrypt.genSaltSync();
+  user.password = bcrypt.hashSync(user.password, salt);
 });
 
 User.prototype.validPassword = function(password) {
