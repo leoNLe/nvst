@@ -1,10 +1,3 @@
-//const express = require("express");
-//const bodyParser = require("body-parser");
-//const cookieParser = require("cookie-parser");
-//const session = require("express-session");
-//const User = require("./models/user");
-//const hbs = require("express-handlebars");
-//const path = require("path");
 const db = require("./models");
 
 module.exports = function(app) {
@@ -86,8 +79,22 @@ module.exports = function(app) {
       res.redirect("/login");
     }
   });
-  // update
-  app.route("/update", (req, res) => {
+  // // update
+  // app.route("/update").get(
+  //   sessionChecker,
+  //   (req, res) => {
+  //     res.render("update", hbsContent);
+  //   },
+  //   db.Users.update({ user "" }, { _id: 1 })
+  //     .success(() => {
+  //       console.log("Password Updated");
+  //     })
+  //     .error(err => {
+  //       console.log(err, "Update failed");
+  //     })
+  // );
+  // logout
+  app.get("/logout", (req, res) => {
     if (req.session.user && req.cookies.user_id) {
       hbsContent.loggedin = true;
       hbsContent.email = req.session.user.email;

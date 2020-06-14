@@ -1,7 +1,12 @@
 {
   "development": {
     "username": "root",
+<<<<<<< Updated upstream
     "password": "mixVok-quxsy0-sinmup",
+=======
+    "password": "root",
+    "port": 8889,
+>>>>>>> Stashed changes
     "database": "stocks",
     "host": "127.0.0.1",
     "dialect": "mysql"
