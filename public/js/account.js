@@ -42,7 +42,7 @@ $(document).ready(() => {
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function updateUser(email, password, fname, lname) {
-    $.put("/api/update", {
+    $.put("/update", {
       userId: id,
       email: email,
       password: password,
