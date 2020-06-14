@@ -6,7 +6,6 @@
 //const hbs = require("express-handlebars");
 //const path = require("path");
 const db = require("./models");
-//const { compare } = require("bcryptjs");
 
 module.exports = function(app) {
   //handle bars
@@ -78,7 +77,7 @@ module.exports = function(app) {
 
   // account
   app.get("/account", (req, res) => {
-    if (req.session.user && req.cookies.user_id) {
+    if (req.session.users && req.cookies.user_id) {
       hbsContent.loggedin = true;
       hbsContent.email = req.session.user.email;
       console.log(req.session.user.email);
