@@ -62,19 +62,18 @@ module.exports = function(app) {
     .post((req, res) => {
       const email = req.body.email,
         password = req.body.password;
-      console.log("here");
-      db.Users.findOne({ where: { email: email } }); //function(err, user) {
-      if (err) {
-        res.redirect("/login");
-      }
-      if (!user) {
-        return document(null, false, console.log("wrong user"));
-      }
-      if (!user.validPassword(password)) {
-        return document(null, false, console.log("wrong password"));
-      }
-    });
 
+      db.Users.findOne({ where: { email: email } }).then(user => {
+        if (!user) {
+          res.redirect("/login");
+        } else if (!user.validPassword(password)) {
+          res.redirect("/login");
+        } else {
+          req.session.user = user.dataValues;
+          res.redirect("/account");
+        }
+      });
+    });
   // account
   app.get("/account", (req, res) => {
     if (req.session.users && req.cookies.user_id) {
