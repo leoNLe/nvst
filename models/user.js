@@ -1,4 +1,5 @@
 module.exports = (Sequelize, DataTypes) => {
+  const bcrypt = require("bcrypt");
   const Users = Sequelize.define("Users", {
     lastName: {
       type: DataTypes.STRING,
@@ -20,6 +21,15 @@ module.exports = (Sequelize, DataTypes) => {
       allowNull: false
     }
   });
+
+  Users.beforeCreate(user => {
+    const salt = bcrypt.genSaltSync();
+    user.password = bcrypt.hashSync(user.password, salt);
+  });
+
+  Users.prototype.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.password);
+  };
 
   Users.associate = models => {
     Users.hasMany(models.Transactions, {

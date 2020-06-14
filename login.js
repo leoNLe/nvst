@@ -6,7 +6,6 @@
 //const hbs = require("express-handlebars");
 //const path = require("path");
 const db = require("./models");
-//const { compare } = require("bcryptjs");
 
 module.exports = function(app) {
   //handle bars
@@ -40,6 +39,8 @@ module.exports = function(app) {
     .post((req, res) => {
       db.Users.create({
         email: req.body.email,
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
         password: req.body.password
       })
         .then(user => {
@@ -73,50 +74,49 @@ module.exports = function(app) {
         return document(null, false, console.log("wrong password"));
       }
     });
-};
-// validPassword()
 
-// account
-app.get("/account", (req, res) => {
-  if (req.session.user && req.cookies.user_id) {
-    hbsContent.loggedin = true;
-    hbsContent.email = req.session.user.email;
-    console.log(req.session.user.email);
-    hbsContent.title = "Already Logged in, not you?";
-    res.render("index", hbsContent);
-  } else {
-    res.redirect("/login");
-  }
-});
-// update
-app.route("/update", (req, res) => {
-  if (req.session.user && req.cookies.user_id) {
-    hbsContent.loggedin = true;
-    hbsContent.email = req.session.user.email;
-    console.log(req.session.email);
-    hbsContent.title = "Update Password?";
-    res.render("update", hbsContent);
-  } else {
-    res.redirect("/login");
-  }
-  update({ title: "" }, { _id: 1 })
+  // account
+  app.get("/account", (req, res) => {
+    if (req.session.users && req.cookies.user_id) {
+      hbsContent.loggedin = true;
+      hbsContent.email = req.session.user.email;
+      console.log(req.session.user.email);
+      hbsContent.title = "Already Logged in, not you?";
+      res.render("index", hbsContent);
+    } else {
+      res.redirect("/login");
+    }
+  });
+  // update
+  app.route("/update", (req, res) => {
+    if (req.session.user && req.cookies.user_id) {
+      hbsContent.loggedin = true;
+      hbsContent.email = req.session.user.email;
+      console.log(req.session.email);
+      hbsContent.title = "Update Password?";
+      res.render("update", hbsContent);
+    } else {
+      res.redirect("/login");
+    }
+    /*.put({ title: "" }, { _id: 1 })
     .success(() => {
       console.log("Password Updated");
     })
     .error(err => {
       console.log(err, "Update failed");
-    });
+    });*/
 
-  // logout
-  app.get("/logout", (req, res) => {
-    if (req.session.user && req.cookies.user_id) {
-      hbsContent.loggedin = false;
-      hbsContent.title = "Logged out, see you tomorrow!";
-      res.clearCookie("user_id");
-      console.log(JSON.stringify(hbsContent));
-      res.redirect("/");
-    } else {
-      res.redirect("/login");
-    }
+    // logout
+    app.get("/logout", (req, res) => {
+      if (req.session.user && req.cookies.user_id) {
+        hbsContent.loggedin = false;
+        hbsContent.title = "Logged out, see you tomorrow!";
+        res.clearCookie("user_id");
+        console.log(JSON.stringify(hbsContent));
+        res.redirect("/");
+      } else {
+        res.redirect("/login");
+      }
+    });
   });
-});
+};
