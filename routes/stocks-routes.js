@@ -92,42 +92,4 @@ module.exports = function(app) {
       res.status(500).send();
     }
   });
-
-  app.get("/api/getProfile", async (req, res) => {
-    const userId = req.body;
-
-    try {
-      const data = await db.Transactions.findAll({
-        attributes: [
-          "symbol",
-          [db.Sequelize.fn("sum", db.Sequelize.col("quantity")), "quantity"]
-        ],
-        where: userId,
-        group: ["symbol"],
-        include: {
-          model: db.Stocks
-        }
-      });
-
-      const stocksData = [];
-      data.forEach(
-        ({
-          dataValues,
-          Stock: {
-            dataValues: { name }
-          }
-        }) => {
-          stocksData.push({
-            name: name,
-            symbol: dataValues.symbol.toUpperCase(),
-            quantity: dataValues.quantity
-          });
-        }
-      );
-
-      res.json({ stocksData });
-    } catch (err) {
-      console.log(err);
-    }
-  });
 };
