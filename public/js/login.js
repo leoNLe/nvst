@@ -29,7 +29,8 @@ $(document).ready(() => {
       password: password
     })
       .then(() => {
-        window.location.replace("/members");
+        // add if condition for err
+        window.location.replace("/portfolio");
         // If there's an error, log the error
       })
       .catch(err => {
