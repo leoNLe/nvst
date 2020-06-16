@@ -1,6 +1,6 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
-const passport = require("../config/passport");
+// const passport = require("../config/passport");
 
 /*const defaultClient = finnhub.ApiClient.instance;
 const api_key = defaultClient.authentications["api_key"];

@@ -106,6 +106,7 @@ module.exports = function(app) {
       });
     } catch (err) {
       console.log(err);
+      res.status(501).send();
     }
   });
 
@@ -127,6 +128,7 @@ module.exports = function(app) {
       console.log(symbol);
     } catch (err) {
       console.log(err);
+      res.status(501).send();
     }
   });
 };
