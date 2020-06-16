@@ -12,7 +12,7 @@ module.exports = (sequelize, DataTypes) => {
   });
 
   Stock.associate = models => {
-    Stock.hasMany(models.EndDayBalances, {
+    Stock.hasMany(models.Transactions, {
       foreignKey: {
         name: "symbol",
         allowNull: false
