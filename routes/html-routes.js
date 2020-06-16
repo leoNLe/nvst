@@ -1,12 +1,29 @@
 // Requiring path to so we can use relative routes to our HTML files
 const path = require("path");
 const db = require("../models");
-const { getQuotes } = require("../lib/utilities");
+const {
+  getQuotes,
+  getHistoricalData,
+  formatHistorical
+} = require("../lib/utilities");
+
 const { Op } = require("sequelize");
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const moment = require("moment");
 
+async function getQuantity(userId, symbol) {
+  return await db.Transactions.findAll({
+    attributes: [
+      "symbol",
+      [db.Sequelize.fn("sum", db.Sequelize.col("quantity")), "quantity"]
+    ],
+    where: {
+      userId,
+      symbol
+    }
+  });
+}
 async function getEndDayBalances(userId) {
   const sevenDaysBack = moment()
     .subtract(7, "days")
@@ -31,6 +48,7 @@ async function getEndDayBalances(userId) {
     console.log(err);
   }
 }
+
 module.exports = function(app) {
   app.get("/", (req, res) => {
     // If the user already has an account send them to the members page
@@ -54,12 +72,11 @@ module.exports = function(app) {
     res.sendFile(path.join(__dirname, "../public/members.html"));
   });
 
-  app.get("/portfolio", async (req, res) => {
+  app.get("/portfolio", isAuthenticated, async (req, res) => {
     // if (!req.user) {
     //   res.redirect("/login");
     // }
     const userId = 1;
-    console.log(userId);
     try {
       const data = await db.Transactions.findAll({
         attributes: [
@@ -94,10 +111,8 @@ module.exports = function(app) {
           currentValue
         });
       }
-      // const chartInfo = JSON.stringify({ hey: "hey" });
       const chartInfo = JSON.stringify(await getEndDayBalances(userId));
-      // console.log(chartInfo);
-      // console.log(stocksData);
+
       res.render("portfolio", {
         layout: "portfolio",
         stocksData,
@@ -112,20 +127,41 @@ module.exports = function(app) {
 
   app.get("/stock/:name", async (req, res) => {
     const query = req.params.name;
-    console.log(symbol);
+    const userId = 1;
     try {
-      const symbol = await db.Stocks.findOne({
+      const data = await db.Stocks.findOne({
         where: {
-          [Op.or]: [
-            {
-              name: query,
-              symbol
-            }
-          ]
+          symbol: query.toUpperCase()
         }
       });
+      if (!data) {
+        console.log("found nothing send to no company page found");
+        res.redirect("/portfolio");
+      }
 
-      console.log(symbol);
+      //Call 2 api for historical data and current price;
+      const [curPrice, historicalPrice, quantityQuery] = await Promise.all([
+        getQuotes(data.dataValues.symbol),
+        getHistoricalData(data.dataValues.symbol),
+        getQuantity(userId, data.dataValues.symbol)
+      ]);
+
+      const priceArr = formatHistorical(historicalPrice, curPrice.data.c);
+      console.log(quantityQuery);
+      const currentShares =
+        quantityQuery.length === 0 || !quantityQuery[0].dataValues.quantity
+          ? 0
+          : quantityQuery[0].dataValues.quantity;
+
+      console.log(currentShares);
+      res.render("stock", {
+        layout: "stock",
+        chartInfo: JSON.stringify(priceArr),
+        name: data.dataValues.name,
+        currentPrice: curPrice.data.c,
+        currentShares,
+        symbol: data.dataValues.symbol
+      });
     } catch (err) {
       console.log(err);
       res.status(501).send();
