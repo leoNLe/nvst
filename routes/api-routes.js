@@ -1,6 +1,6 @@
 // Requiring our models and passport as we've configured it
 const db = require("../models");
-//const passport = require("../config/passport");
+const passport = require("../config/passport");
 
 /*const defaultClient = finnhub.ApiClient.instance;
 const api_key = defaultClient.authentications["api_key"];
@@ -129,5 +129,17 @@ module.exports = function(app) {
         id: req.user.id
       });
     }
+  });
+
+  app.post("/api/addEndBalance", (req, res) => {
+    const { balance, date, userId } = req.body;
+    db.EndDayBalances.create({ balance, date, userId })
+      .then(response => {
+        console.log(response);
+        res.json({ success: "true" });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   });
 };

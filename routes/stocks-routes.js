@@ -1,6 +1,23 @@
 const db = require("../models");
-
+const { getStock } = require("../lib/utilities");
 module.exports = function(app) {
+  app.post("/api/updateStockTable", async (req, res) => {
+    try {
+      const { data: companies } = await getStock();
+      console.log(companies);
+      for (const company of companies) {
+        await db.Stocks.create({
+          symbol: company.symbol,
+          name: company.description
+        });
+      }
+      console.log("All stocks added");
+      res.json({ success: true });
+    } catch (err) {
+      console.log(err);
+    }
+  });
+
   app.post("/api/addStock", (req, res) => {
     const { symbol, name } = req.body;
 
