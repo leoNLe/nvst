@@ -51,9 +51,9 @@ async function getEndDayBalances(userId) {
 
 module.exports = function(app) {
   app.get("/", (req, res) => {
-    // If the user already has an account send them to the members page
+    // If the user already has an account send them to the members portfolio page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/portfolio");
     }
     res.sendFile(path.join(__dirname, "../public/signup.html"));
   });
@@ -61,15 +61,15 @@ module.exports = function(app) {
   app.get("/login", (req, res) => {
     // If the user already has an account send them to the members page
     if (req.user) {
-      res.redirect("/members");
+      res.redirect("/portfolio");
     }
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  app.get("/members", isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
+  app.get("/portfolio", isAuthenticated, (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/portfolio.html"));
   });
 
   app.get("/portfolio", isAuthenticated, async (req, res) => {
