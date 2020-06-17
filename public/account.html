@@ -76,9 +76,10 @@
                   <div class="col-xs-6">
                     <input
                       type="text"
+                      id="fname"
                       class="form-control"
                       name="first_name"
-                      placeholder="{{this.firstName}}"
+                      placeholder="first Name"
                       required="required"
                     />
                   </div>
@@ -87,9 +88,10 @@
                   <div class="col-xs-6">
                     <input
                       type="text"
+                      id="lname"
                       class="form-control"
                       name="last_name"
-                      placeholder="{{this.lastName}}"
+                      placeholder="last Name"
                       required="required"
                     />
                   </div>
@@ -99,15 +101,17 @@
             <div class="form-group">
               <input
                 type="email"
+                id="email-input"
                 class="form-control"
                 name="email"
-                placeholder="{{this.email}}"
+                placeholder="email"
                 required="required"
               />
             </div>
             <div class="form-group">
               <input
                 type="password"
+                id="password-input"
                 class="form-control"
                 name="password"
                 placeholder="Password"
@@ -135,7 +139,7 @@
               ></span>
               <span class="sr-only">Error:</span> <span class="msg"></span>
             </div>
-            <button type="update" class="btn btn-default">Update</button>
+            <button type="submit" class="btn btn-default">Update</button>
           </form>
           <br />
         </div>

@@ -1,14 +1,15 @@
 $(document).ready(() => {
   // Getting references to our form and input
-  const updateForm = $("form.account");
-  const emailInput = $("input#email-input");
-  const passwordInput = $("input#password-input");
-  const fName = $("input#fname");
-  const lName = $("input#lname");
+  const updateForm = $(".account");
+  const emailInput = $("#email-input");
+  const passwordInput = $("#password-input");
+  const fName = $("#fname");
+  const lName = $("#lname");
 
   // When the signup button is clicked, we validate the email and password are not blank
   updateForm.on("submit", event => {
     event.preventDefault();
+    console.log(emailInput);
     const userData = {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim(),
@@ -40,11 +41,22 @@ $(document).ready(() => {
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function updateUser(email, password, fname, lname) {
-    $.put("/update", {
+    // $.put("/update", {
+    //   email: email,
+    //   password: password,
+    //   firstName: fname,
+    //   lastName: lname
+    // }
+    const dataObj = {
       email: email,
       password: password,
       firstName: fname,
       lastName: lname
+    };
+    $.ajax({
+      url: "/update",
+      type: "PUT",
+      data: JSON.stringify(dataObj)
     })
       .then(() => {
         //add if condition for err
