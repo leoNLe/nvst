@@ -28,8 +28,10 @@ $(document).ready(() => {
       email: email,
       password: password
     })
-      .then(() => {
+      .then(response => {
         // add if condition for err
+        console.log(response);
+        localStorage.setItem("userId", response.userId);
         window.location.replace("/portfolio");
         // If there's an error, log the error
       })

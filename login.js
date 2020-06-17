@@ -1,128 +1,96 @@
 const db = require("./models");
-
+const isAuthenticate = require("./config/middleware/isAuthenticated");
+const passport = require("./config/passport");
 module.exports = function(app) {
   //handle bars
-  const hbsContent = {
-    email: "",
-    loggedin: false,
-    title: "Not Logged In",
-    body: "placeholder"
-  };
+  // const hbsContent = {
+  //   email: "",
+  //   loggedin: false,
+  //   title: "Not Logged In",
+  //   body: "placeholder"
+  // };
 
   // check for if user is already logged in
-  const sessionChecker = (req, res, next) => {
-    if (req.session.user && req.cookies.user_id) {
-      res.redirect("/account");
-    } else {
-      next();
-    }
-  };
+  // const sessionChecker = (req, res, next) => {
+  //   console.log("session checker:");
+  //   console.log(`req: ${req}`);
+  //   console.log(`res: ${res}`);
+  //   console.log(`next: ${next}`);
+  //   if (req.session.user && req.cookies.userId) {
+  //     res.redirect("/account");
+  //   } else {
+  //     next();
+  //   }
+  // };
 
   //home
-  app.get("/", sessionChecker, (req, res) => {
-    res.redirect("/login");
+  app.get("/", (req, res) => {
+    res.redirect("/login.html");
   });
 
   // signup
-  app
-    .route("/signup")
-    .get((req, res) => {
-      res.render("signup", hbsContent);
+  app.route("/signup").post((req, res) => {
+    console.log("/signup");
+    db.Users.create({
+      email: req.body.email,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+      password: req.body.password
     })
-    .post((req, res) => {
-      db.Users.create({
-        email: req.body.email,
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        password: req.body.password
+      .then(user => {
+        console.log(user.dataValues);
+        res.redirect("/portfolio");
       })
-        .then(user => {
-          req.session.user = user.dataValues;
-          res.redirect("/account");
-        })
-        .catch(error => {
-          res.redirect("/signup");
-          console.log(error);
-        });
-    });
+      .catch(error => {
+        console.log(error);
+        res.redirect("/signup.html");
+      });
+  });
 
   //login
-  app
-    .route("/login")
-    .get(sessionChecker, (req, res) => {
-      res.render("login", hbsContent);
-    })
-    .post((req, res) => {
-      const email = req.body.email,
-        password = req.body.password;
+  app.post("/login", passport.authenticate("local"), (req, res) => {
+    // console.log("/login");
+    // console.log(req.user);
+    res.json({ userId: req.user.dataValues.id });
+    // const email = req.body.email,
+    //   password = req.body.password;
 
-      db.Users.findOne({ where: { email: email } }).then(user => {
-        if (!user) {
-          res.redirect("/login");
-        } else if (!user.validPassword(password)) {
-          res.redirect("/login");
-        } else {
-          req.session.user = user.dataValues;
-          res.redirect("/account");
-        }
-      });
-    });
-  // account
-  app.get("/account", (req, res) => {
-    if (req.session.users && req.cookies.user_id) {
-      hbsContent.loggedin = true;
-      hbsContent.email = req.session.user.email;
-      console.log(req.session.user.email);
-      hbsContent.title = "Already Logged in, not you?";
-      res.render("index", hbsContent);
-    } else {
-      res.redirect("/login");
-    }
+    // db.Users.findOne({ where: { email: email } }).then(user => {
+    //   console.log(user);
+    //   if (!user) {
+    //     res.redirect("/login");
+    //   } else if (!user.validPassword(password)) {
+    //     res.redirect("/login");
+    //   } else {
+    //     req.session.user = user.dataValues;
+    //     res.redirect("/portfolio");
+    //   }
+    // });
   });
-  // // update
-  // app.route("/update").get(
-  //   sessionChecker,
-  //   (req, res) => {
-  //     res.render("update", hbsContent);
-  //   },
-  //   db.Users.update({ user "" }, { _id: 1 })
-  //     .success(() => {
-  //       console.log("Password Updated");
-  //     })
-  //     .error(err => {
-  //       console.log(err, "Update failed");
-  //     })
-  // );
+  // account
+  // app.get("/account", (req, res) => {
+  //   console.log("/account");
+  //   if (req.session.users && req.cookies.user_id) {
+  //     hbsContent.loggedin = true;
+  //     hbsContent.email = req.session.user.email;
+  //     console.log(req.session.user.email);
+  //     hbsContent.title = "Already Logged in, not you?";
+  //     res.render("index", hbsContent);
+  //   } else {
+  //     res.redirect("/login");
+  //   }
+  // });
+
   // logout
   app.get("/logout", (req, res) => {
     if (req.session.user && req.cookies.user_id) {
-      hbsContent.loggedin = true;
-      hbsContent.email = req.session.user.email;
-      console.log(req.session.email);
-      hbsContent.title = "Update Password?";
-      res.render("update", hbsContent);
+      hbsContent.loggedin = false;
+      hbsContent.title = "Logged out, see you tomorrow!";
+      res.clearCookie("user_id");
+      console.log(JSON.stringify(hbsContent));
+      res.redirect("/");
     } else {
-      res.redirect("/login");
+      res.redirect("/login.html");
     }
-    /*.put({ title: "" }, { _id: 1 })
-    .success(() => {
-      console.log("Password Updated");
-    })
-    .error(err => {
-      console.log(err, "Update failed");
-    });*/
-
-    // logout
-    app.get("/logout", (req, res) => {
-      if (req.session.user && req.cookies.user_id) {
-        hbsContent.loggedin = false;
-        hbsContent.title = "Logged out, see you tomorrow!";
-        res.clearCookie("user_id");
-        console.log(JSON.stringify(hbsContent));
-        res.redirect("/");
-      } else {
-        res.redirect("/login");
-      }
-    });
   });
 };

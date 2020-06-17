@@ -1,5 +1,5 @@
 // Requiring path to so we can use relative routes to our HTML files
-const path = require("path");
+// const path = require("path");
 const db = require("../models");
 const {
   getQuotes,
@@ -24,6 +24,7 @@ async function getQuantity(userId, symbol) {
     }
   });
 }
+
 async function getEndDayBalances(userId) {
   const sevenDaysBack = moment()
     .subtract(7, "days")
@@ -50,33 +51,24 @@ async function getEndDayBalances(userId) {
 }
 
 module.exports = function(app) {
-  app.get("/", (req, res) => {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/members");
-    }
-    res.sendFile(path.join(__dirname, "../public/signup.html"));
-  });
+  // app.get("/", (req, res) => {
+  //   // If the user already has an account send them to the members page
+  //   if (req.user) {
+  //     res.redirect("/members");
+  //   }
+  //   res.sendFile(path.join(__dirname, "../public/signup.html"));
+  // });
 
-  app.get("/login", (req, res) => {
-    // If the user already has an account send them to the members page
-    if (req.user) {
-      res.redirect("/members");
-    }
-    res.sendFile(path.join(__dirname, "../public/login.html"));
-  });
-
-  // Here we've add our isAuthenticated middleware to this route.
-  // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  app.get("/members", isAuthenticated, (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/members.html"));
-  });
+  // app.get("/login", (req, res) => {
+  //   // If the user already has an account send them to the members page
+  //   if (req.user) {
+  //     res.redirect("/members");
+  //   }
+  //   res.sendFile(path.join(__dirname, "../public/login.html"));
+  // });
 
   app.get("/portfolio", isAuthenticated, async (req, res) => {
-    // if (!req.user) {
-    //   res.redirect("/login");
-    // }
-    const userId = 1;
+    const userId = req.user.id;
     try {
       const data = await db.Transactions.findAll({
         attributes: [
@@ -125,9 +117,9 @@ module.exports = function(app) {
     }
   });
 
-  app.get("/stock/:name", async (req, res) => {
+  app.get("/stock/:name", isAuthenticated, async (req, res) => {
     const query = req.params.name;
-    const userId = 1;
+    const userId = req.user.id;
     try {
       const data = await db.Stocks.findOne({
         where: {
@@ -153,7 +145,6 @@ module.exports = function(app) {
           ? 0
           : quantityQuery[0].dataValues.quantity;
 
-      console.log(currentShares);
       res.render("stock", {
         layout: "stock",
         chartInfo: JSON.stringify(priceArr),

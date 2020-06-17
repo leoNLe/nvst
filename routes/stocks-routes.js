@@ -39,7 +39,8 @@ module.exports = function(app) {
   });
 
   app.post("/api/sell", async (req, res) => {
-    const { userId, symbol, price, quantity } = req.body;
+    const userId = req.user.id;
+    const { symbol, price, quantity } = req.body;
     console.log(req.body);
     if (!userId || !symbol || !price || !quantity) {
       return res
@@ -70,6 +71,7 @@ module.exports = function(app) {
           quantity: `-${quantity}`,
           buy: 0
         });
+        console.log(result);
         res.redirect(`/stock/${symbol}`);
       } else {
         res.json({ sufficient: false, message: "Not enough stocks" });
@@ -82,7 +84,8 @@ module.exports = function(app) {
 
   app.post("/api/buy", async (req, res) => {
     console.log(req.body);
-    const { userId, symbol, price, quantity } = req.body;
+    const userId = req.user.id;
+    const { symbol, price, quantity } = req.body;
 
     if (!userId || !symbol || !price || !quantity) {
       return res.status(400).send();
