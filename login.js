@@ -1,6 +1,5 @@
 const db = require("./models");
 const passport = require("./config/passport");
-const { authenticate } = require("./config/passport");
 const isAuthenticated = require("./config/middleware/isAuthenticated");
 module.exports = function(app) {
   //home
