@@ -1,6 +1,6 @@
 const db = require("../models");
 const { getStock } = require("../lib/utilities");
-const isAuthenticated = require("../config/middleware");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function(app) {
   app.post("/api/updateStockTable", async (req, res) => {
     try {
