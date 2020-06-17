@@ -37,13 +37,10 @@ $(document).ready(() => {
     lName.val("");
   });
 
-  const id = $(this).data("id");
-
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function updateUser(email, password, fname, lname) {
     $.put("/update", {
-      userId: id,
       email: email,
       password: password,
       firstName: fname,
@@ -51,7 +48,7 @@ $(document).ready(() => {
     })
       .then(() => {
         //add if condition for err
-        window.location.replace("/portfolio");
+        window.location.replace("/login.html");
         // If there's an error, handle it by throwing up a bootstrap alert
       })
       .catch(handleLoginErr);
