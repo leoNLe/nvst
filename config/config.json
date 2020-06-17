@@ -9,7 +9,7 @@
   },
   "test": {
     "username": "root",
-    "password": "mixVok-quxsy0-sinmup",
+    "password": "root",
     "database": "stocks",
     "host": "127.0.0.1",
     "dialect": "mysql"
