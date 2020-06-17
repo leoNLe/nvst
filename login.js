@@ -81,15 +81,15 @@ module.exports = function(app) {
   // });
 
   // logout
-  app.get("/logout", (req, res) => {
-    if (req.session.user && req.cookies.user_id) {
-      hbsContent.loggedin = false;
-      hbsContent.title = "Logged out, see you tomorrow!";
-      res.clearCookie("user_id");
-      console.log(JSON.stringify(hbsContent));
-      res.redirect("/");
-    } else {
-      res.redirect("/login.html");
-    }
-  });
+  // app.get("/logout", (req, res) => {
+  //   if (req.session.user && req.cookies.user_id) {
+  //     hbsContent.loggedin = false;
+  //     hbsContent.title = "Logged out, see you tomorrow!";
+  //     res.clearCookie("user_id");
+  //     console.log(JSON.stringify(hbsContent));
+  //     res.redirect("/");
+  //   } else {
+  //     res.redirect("/login.html");
+  //   }
+  // });
 };

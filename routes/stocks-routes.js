@@ -1,5 +1,6 @@
 const db = require("../models");
 const { getStock } = require("../lib/utilities");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
 module.exports = function(app) {
   app.post("/api/updateStockTable", async (req, res) => {
     try {
@@ -38,7 +39,7 @@ module.exports = function(app) {
       });
   });
 
-  app.post("/api/sell", async (req, res) => {
+  app.post("/api/sell", isAuthenticated, async (req, res) => {
     const userId = req.user.id;
     const { symbol, price, quantity } = req.body;
     console.log(req.body);
@@ -82,8 +83,7 @@ module.exports = function(app) {
     }
   });
 
-  app.post("/api/buy", async (req, res) => {
-    console.log(req.body);
+  app.post("/api/buy", isAuthenticated, async (req, res) => {
     const userId = req.user.id;
     const { symbol, price, quantity } = req.body;
 
