@@ -65,26 +65,26 @@ module.exports = function(app) {
   // how we configured our Sequelize User Model. If the user is created successfully, proceed to log the user in,
   // otherwise send back an error
 
-  const WebSocket = require("ws"); //npm i ws
-  const socket = new WebSocket(
-    "wss://ws.finnhub.io?token=brcsl7nrh5rfdvppg6q0"
-  ); //change token to personal token
+  // const WebSocket = require("ws"); //npm i ws
+  // const socket = new WebSocket(
+  //   "wss://ws.finnhub.io?token=brcsl7nrh5rfdvppg6q0"
+  // ); //change token to personal token
 
-  // Connection opened -> Subscribe
-  socket.addEventListener("open", () => {
-    //for testing purposes
-    socket.send(JSON.stringify({ type: "subscribe", symbol: "AAPL" }));
-    socket.send(JSON.stringify({ type: "subscribe", symbol: "MSFT" }));
-    socket.send(JSON.stringify({ type: "subscribe", symbol: "AMZN" }));
-    socket.send(JSON.stringify({ type: "subscribe", symbol: "CRON" }));
-    socket.send(JSON.stringify({ type: "subscribe", symbol: "CGC" }));
-  });
+  // // Connection opened -> Subscribe
+  // socket.addEventListener("open", () => {
+  //   //for testing purposes
+  //   socket.send(JSON.stringify({ type: "subscribe", symbol: "AAPL" }));
+  //   socket.send(JSON.stringify({ type: "subscribe", symbol: "MSFT" }));
+  //   socket.send(JSON.stringify({ type: "subscribe", symbol: "AMZN" }));
+  //   socket.send(JSON.stringify({ type: "subscribe", symbol: "CRON" }));
+  //   socket.send(JSON.stringify({ type: "subscribe", symbol: "CGC" }));
+  // });
 
-  // Listen for messages
-  socket.addEventListener("message", event => {
-    // prints to console
-    console.log("Message from server ", event.data);
-  });
+  // // Listen for messages
+  // socket.addEventListener("message", event => {
+  //   // prints to console
+  //   console.log("Message from server ", event.data);
+  // });
 
   // Unsubscribe
   /*const unsubscribe = function(symbol) {

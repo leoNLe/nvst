@@ -39,12 +39,13 @@ module.exports = function(app) {
   });
 
   app.post("/api/sell", async (req, res) => {
-    const { userId, symbol, price, quantity } = req.body;
-
+    const userId = req.user.id;
+    const { symbol, price, quantity } = req.body;
+    console.log(req.body);
     if (!userId || !symbol || !price || !quantity) {
       return res
         .status(400)
-        .json({ message: "missing: userId, symbol, sell price, or quantity" });
+        .json({ message: "Missing: userId, symbol, sell price, or quantity" });
     }
 
     try {
@@ -58,21 +59,20 @@ module.exports = function(app) {
       });
 
       let stocksOnHand = 0;
-      allTransactions.reduce();
       allTransactions.forEach(element => {
         stocksOnHand += element.dataValues.quantity;
       });
       //Check if user have enough stock to sell
       if (stocksOnHand >= quantity) {
-        await db.Transactions.create({
+        const result = await db.Transactions.create({
           userId,
           symbol: symbol.toLowerCase(),
           price,
           quantity: `-${quantity}`,
           buy: 0
         });
-
-        res.json({ success: true });
+        console.log(result);
+        res.redirect(`/stock/${symbol}`);
       } else {
         res.json({ sufficient: false, message: "Not enough stocks" });
       }
@@ -83,7 +83,9 @@ module.exports = function(app) {
   });
 
   app.post("/api/buy", async (req, res) => {
-    const { userId, symbol, price, quantity } = req.body;
+    console.log(req.body);
+    const userId = req.user.id;
+    const { symbol, price, quantity } = req.body;
 
     if (!userId || !symbol || !price || !quantity) {
       return res.status(400).send();
@@ -103,7 +105,7 @@ module.exports = function(app) {
         buy: 1
       });
 
-      res.json({ success: true });
+      res.redirect(`/stock/${symbol}`);
     } catch (err) {
       console.log(err);
       res.status(500).send();

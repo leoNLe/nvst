@@ -24,6 +24,8 @@ module.exports = (Sequelize, DataTypes) => {
   });
 
   Users.beforeCreate(user => {
+    console.log("before create");
+    console.log(user);
     const salt = bcrypt.genSaltSync();
     user.password = bcrypt.hashSync(user.password, salt);
   });

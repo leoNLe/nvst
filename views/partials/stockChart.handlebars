@@ -1,6 +1,5 @@
+<canvas id="canvas" style="min-height: 250px; height: 50%;  max-width: 100%;">
 
-<canvas id="canvas" style="min-height: 250px; height: 400px; max-height: 500px; max-width: 100%;">
-		
 </canvas>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -9,7 +8,7 @@
 
 <script>
     Chart.defaults.global.legend.display = false;
-	const chartInfo = JSON.parse({{{json chartInfo}}});
+    const chartInfo = JSON.parse({{{json chartInfo}}});
     console.log(chartInfo);
 	const ctx = document.getElementById('canvas').getContext('2d');
 	const chart = new Chart(ctx, {
@@ -19,11 +18,11 @@
     data: {
         labels: chartInfo.dates,
         datasets: [{
-            label: 'Balance over Time',
             fill: false,
-            data: chartInfo.balance
+            data: chartInfo.prices
         }]
     },
     // Configuration options go here
 });
 </script>
+

@@ -30,7 +30,9 @@
     "no-unused-vars": "error",
     "no-var": "error",
     "prefer-arrow-callback": "error",
-    "prefer-const": "error",
+    "prefer-const": ["error", {
+      "destructuring": "all"
+    }],
     "prettier/prettier": "error",
     "quotes": ["error", "double"],
     "semi": ["error", "always"],

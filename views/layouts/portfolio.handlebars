@@ -21,11 +21,11 @@
 </head>
 
 <body class="hold-transition sidebar-mini">
-  <div class="wrapper">
-    <!-- Navbar -->
-    <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="margin-left: 0px;">
-      <!-- SEARCH FORM -->
-      <form class="search-btn form-inline ml-3">
+    <div class="wrapper">
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light" style="margin-left: 0px;">
+          <!-- SEARCH FORM -->
+           <form class="search-btn form-inline ml-3">
         <div class="input-group input-group-sm">
           <input class="form-control form-control-navbar" id="search-query" type="search" placeholder="Search"
             aria-label="Search">
@@ -36,69 +36,53 @@
           </div>
         </div>
       </form>
+      
+          <!-- Right navbar links -->
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="account.html" role="button">
+                Account Settings <i class="fa fa-cog"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/logout" role="button">
+                Sign out <i class="fa fa-sign-out"></i>
+              </a>
+            </li>
 
-      <!-- Right navbar links -->
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item">
-          <a class="nav-link" href="account.html" role="button">
-            Account Settings <i class="fa fa-cog"></i>
-          </a>
-        </li>
+          </ul>
+        </nav>
+        {{{body}}}
+      </div>
+    <footer>
+        <div class="footer-copyright text-center text-black-50 py-3">
+            © 2020 Copyright: NVST
 
-        <li class="nav-item">
-          <a class="nav-link" href="stock.html" role="button">
-            Stock <i class="fa fa-line-chart"></i>
-          </a>
-        </li>
+        </div>
+    </footer>
 
-        <li class="nav-item">
-          <a class="nav-link" href="/logout" role="button">
-            Sign out <i class="fa fa-sign-out"></i>
-          </a>
-        </li>
-
-      </ul>
-    </nav>
-    {{{body}}}
-  </div>
-  <footer>
-    <div class="footer-copyright text-center text-black-50 py-3">
-      © 2020 Copyright: NVST
-    </div>
-  </footer>
-  <!-- jQuery -->
-
-
-
-  <script>
+ <script>
     $(document).ready(() => {
       // Getting references to our searched query
       const searchBtn = $("form.search-btn");
       const searchedQuery = $("input#search-query")
-
       searchBtn.on("submit", event => {
         event.preventDefault();
+        console.log("here")
         const stockData = {
           stockSymbol: searchedQuery.val().trim()
         };
-
         if (!stockData.stockSymbol) {
           return;
         }
-
-
         searchStock(stockData.stockSymbol);
         searchedQuery.val("");
-
       });
-
-
       function searchStock(stockSymbol) {
-        $.get(`/stock/${stockSymbol}`, {
-
-        })
-          .then(() => {
+        $.get(`/stock/${stockSymbol}`)
+          .then((response) => {
             // add if condition for err
+            console.log(response)
             window.location.replace(`/stock/${stockSymbol}`);
             // If there's an error, log the error
           })
