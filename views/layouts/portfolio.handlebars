@@ -68,7 +68,6 @@
       const searchedQuery = $("input#search-query")
       searchBtn.on("submit", event => {
         event.preventDefault();
-        console.log("here")
         const stockData = {
           stockSymbol: searchedQuery.val().trim()
         };
@@ -82,7 +81,6 @@
         $.get(`/stock/${stockSymbol}`)
           .then((response) => {
             // add if condition for err
-            console.log(response)
             window.location.replace(`/stock/${stockSymbol}`);
             // If there's an error, log the error
           })
