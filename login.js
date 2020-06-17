@@ -1,5 +1,4 @@
 const db = require("./models");
-const isAuthenticate = require("./config/middleware/isAuthenticated");
 const passport = require("./config/passport");
 module.exports = function(app) {
   //handle bars
