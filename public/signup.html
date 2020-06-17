@@ -1,105 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sign Up</title>
+    <!-- Font Awesome -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <!-- Bootstrap -->
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+      integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+      crossorigin="anonymous"
+    />
+    <link href="stylesheets/style.css" rel="stylesheet" />
 
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sign Up</title>
-        <!-- Font Awesome -->
-        <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-            integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous" />
-        <link href="stylesheets/style.css" rel="stylesheet" />
+    <!-- Google Font: Source Sans Pro -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Tangerine"
+    />
+    <!-- Theme style -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css"
+      integrity="sha256-e6m1bynxLVxZVbcvJiDKuKgUb19u0sDT9PIdJjLqr0E="
+      crossorigin="anonymous"
+    />
+  </head>
 
-        <!-- Google Font: Source Sans Pro -->
-        <link rel="stylesheet"
-              href="https://fonts.googleapis.com/css?family=Tangerine">
-          <!-- Theme style -->
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/css/adminlte.min.css" integrity="sha256-e6m1bynxLVxZVbcvJiDKuKgUb19u0sDT9PIdJjLqr0E=" crossorigin="anonymous" />
-       
-    </head>
-    
-
-<body>
+  <body>
     <header>
-        <nav
-          class="main-header navbar navbar-expand navbar-white navbar-light"
-          style="margin-left: 0px;"
-        >
-          <form class="form-inline ml-3">
-            <div class="input-group input-group-sm">
-              <span class="navbar-brand">NVST</span>
-            </div>
-          </form>
-    
-          <!-- Right navbar links -->
-          <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-              <a class="nav-link" href="index.html" role="button">
-                Home <i class="fa fa-home"></i>
-              </a>
-            </li>
-          </ul>
-        </nav>
-        <!-- /.navbar -->
-      </header>
+      <nav
+        class="main-header navbar navbar-expand navbar-white navbar-light"
+        style="margin-left: 0px;"
+      >
+        <form class="form-inline ml-3">
+          <div class="input-group input-group-sm">
+            <span class="navbar-brand">NVST</span>
+          </div>
+        </form>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="index.html" role="button">
+              Home <i class="fa fa-home"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.navbar -->
+    </header>
     <div class="container">
-        <div class="row">
-            <div class="col-md-6 col-md-offset-3">
-                <br>
-                <h2>Sign Up For the NVST!</h2>
-                <form class="signup">
-                    <div class="form-group">
-                        <div class="row">
-                            <div class="col">
-                                <div class="col-xs-6"><input type="text" class="form-control" id="fname"
-                                        name="first_name" placeholder="First Name" required="required"></div>
-                            </div>
-                            <div class="col">
-                                <div class="col-xs-6"><input type="text" class="form-control" id="lname"
-                                        name="last_name" placeholder="Last Name" required="required"></div>
-                            </div>
-                        </div>
-                    </div>
-                        <div class="form-group">
-                            <input type="email" class="form-control" id="email-input" name="email" placeholder="Email"
-                                required="required">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="password-input" name="password"
-                                placeholder="Password" required="required">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" class="form-control" id="confirm-password-input"
-                                name="confirm_password" placeholder="Confirm Password" required="required">
-                        </div>
-                        <div style="display: none" id="alert" class="alert alert-danger" role="alert">
-                            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-                            <span class="sr-only">Error:</span> <span class="msg"></span>
-                        </div>
-                        <button type="submit" class="btn btn-default">Sign Up</button>
-                </form>
-                <br />
-                <div class="hint-text">Already have an account? <a href="/login">Login here</a></div>
+      <div class="row">
+        <div class="col-md-6 col-md-offset-3">
+          <br />
+          <h2>Sign Up For the NVST!</h2>
+          <form class="signup">
+            <div class="form-group">
+              <div class="row">
+                <div class="col">
+                  <div class="col-xs-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="fname"
+                      name="first_name"
+                      placeholder="First Name"
+                      required="required"
+                    />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="col-xs-6">
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="lname"
+                      name="last_name"
+                      placeholder="Last Name"
+                      required="required"
+                    />
+                  </div>
+                </div>
+              </div>
             </div>
+            <div class="form-group">
+              <input
+                type="email"
+                class="form-control"
+                id="email-input"
+                name="email"
+                placeholder="Email"
+                required="required"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                id="password-input"
+                name="password"
+                placeholder="Password"
+                required="required"
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="password"
+                class="form-control"
+                id="confirm-password-input"
+                name="confirm_password"
+                placeholder="Confirm Password"
+                required="required"
+              />
+            </div>
+            <div
+              style="display: none"
+              id="alert"
+              class="alert alert-danger"
+              role="alert"
+            >
+              <span
+                class="glyphicon glyphicon-exclamation-sign"
+                aria-hidden="true"
+              ></span>
+              <span class="sr-only">Error:</span> <span class="msg"></span>
+            </div>
+            <button type="submit" class="btn btn-default">Sign Up</button>
+          </form>
+          <br />
+          <div class="hint-text">
+            Already have an account? <a href="/login.html">Login here</a>
+          </div>
         </div>
+      </div>
     </div>
     <footer style="position: fixed;">
-        <div class="footer-copyright text-center text-black-50 py-3">
-            © 2020 Copyright: NVST
-        </div>
+      <div class="footer-copyright text-center text-black-50 py-3">
+        © 2020 Copyright: NVST
+      </div>
     </footer>
     <!-- jQuery -->
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
- <!-- ChartJS -->
-<!-- <script src="plugins/chart.js/Chart.min.js"></script> -->
-<!-- AdminLTE App -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js" integrity="sha256-qgEvQZWPqqD1J5uCoPAsOZ7kzPmcFpS1AHIU7mowcAE=" crossorigin="anonymous"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/demo.min.js" integrity="sha256-gv3WAOq1lCzyJJF/MEYpFx3DgSMOR5am/g1Eszv2kWw=" crossorigin="anonymous"></script>
-  <!-- page script -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- ChartJS -->
+    <!-- <script src="plugins/chart.js/Chart.min.js"></script> -->
+    <!-- AdminLTE App -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/adminlte.min.js"
+      integrity="sha256-qgEvQZWPqqD1J5uCoPAsOZ7kzPmcFpS1AHIU7mowcAE="
+      crossorigin="anonymous"
+    ></script>
+    <!-- AdminLTE for demo purposes -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/admin-lte/3.0.5/js/demo.min.js"
+      integrity="sha256-gv3WAOq1lCzyJJF/MEYpFx3DgSMOR5am/g1Eszv2kWw="
+      crossorigin="anonymous"
+    ></script>
+    <!-- page script -->
     <script type="text/javascript" src="js/signup.js"></script>
-</body>
-
+  </body>
 </html>
