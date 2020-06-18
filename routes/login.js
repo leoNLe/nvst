@@ -34,7 +34,7 @@ module.exports = function(app) {
     res.json({ userId: req.user.dataValues.id });
   });
 
-  app.put("/update", isAuthenticated, async (req, res) => {
+  app.post("/update", isAuthenticated, async (req, res) => {
     const id = req.user.id;
     const { firstName, lastName, email, password } = req.body;
     // console.log(req.user.id);
@@ -52,7 +52,7 @@ module.exports = function(app) {
         }
       );
       console.log(user);
-      res.redirect("/logout.html");
+      res.redirect("/login");
     } catch (err) {
       console.log(err);
       res.status(501).send();
@@ -64,7 +64,7 @@ module.exports = function(app) {
       const deletedUser = await db.Users.destroy({ where: { id } });
       console.log(deletedUser);
       console.log(path.join(__dirname, "../public/login.html"));
-      res.json({ sucess: true });
+      res.redirect("/login");
     } catch (err) {
       console.log(err);
       res.status(501).send();
