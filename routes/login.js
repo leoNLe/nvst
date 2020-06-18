@@ -1,10 +1,11 @@
-const db = require("./models");
-const passport = require("./config/passport");
-const isAuthenticated = require("./config/middleware/isAuthenticated");
+const db = require("../models");
+const passport = require("../config/passport");
+const isAuthenticated = require("../config/middleware/isAuthenticated");
+const path = require("path");
 module.exports = function(app) {
   //home
   app.get("/", (req, res) => {
-    res.redirect("/login.html");
+    res.sendFile(path.join(__dirname, "../public/login.html"));
   });
   // signup
   app.route("/signup").post((req, res) => {
@@ -16,17 +17,20 @@ module.exports = function(app) {
       password: req.body.password
     })
       .then(user => {
+        console.log("/signup resolved");
         console.log(user.dataValues);
-        res.redirect("/portfolio");
+        res.redirect(307, "/api/login");
       })
       .catch(error => {
+        console.log("/signup err");
         console.log(error);
         res.redirect("/signup.html");
       });
   });
 
   //login
-  app.post("/login", passport.authenticate("local"), (req, res) => {
+  app.post("/api/login", passport.authenticate("local"), (req, res) => {
+    // console.log("inlog in");
     res.json({ userId: req.user.dataValues.id });
   });
 
@@ -48,10 +52,27 @@ module.exports = function(app) {
         }
       );
       console.log(user);
-      res.redirect("/logout");
+      res.redirect("/logout.html");
     } catch (err) {
       console.log(err);
       res.status(501).send();
     }
+  });
+  app.delete("/api/delete", isAuthenticated, async (req, res) => {
+    const id = req.user.id;
+    try {
+      const deletedUser = await db.Users.destroy({ where: { id } });
+      console.log(deletedUser);
+      console.log(path.join(__dirname, "../public/login.html"));
+      res.json({ sucess: true });
+    } catch (err) {
+      console.log(err);
+      res.status(501).send();
+    }
+  });
+
+  app.get("/logout", (req, res) => {
+    req.logout();
+    res.redirect("/");
   });
 };

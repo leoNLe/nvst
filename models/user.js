@@ -39,12 +39,14 @@ module.exports = (Sequelize, DataTypes) => {
       foreignKey: {
         name: "userId"
       },
+      onDelete: "cascade",
       allowNull: false
     });
     Users.hasMany(models.EndDayBalances, {
       foreignKey: {
         name: "userId"
       },
+      onDelete: "cascade",
       allowNull: false
     });
   };
