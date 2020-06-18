@@ -67,7 +67,7 @@ $(document).ready(() => {
       .then(() => {
         //add if condition for err
         // If there's an error, handle it by throwing up a bootstrap alert
-        window.location.replace("/portfolio");
+        window.location.replace("/login");
       })
       .catch(handleLoginErr);
   }
