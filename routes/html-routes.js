@@ -88,9 +88,10 @@ module.exports = function(app) {
         });
       }
       const chartInfo = JSON.stringify(await getEndDayBalances(userId));
-
+      total = total.toFixed(2);
       res.render("portfolio", {
         layout: "portfolio",
+        firstName: req.user.firstName,
         stocksData,
         total,
         chartInfo
