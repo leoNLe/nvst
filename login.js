@@ -31,17 +31,24 @@ module.exports = function(app) {
   });
 
   app.put("/update", isAuthenticated, async (req, res) => {
-    const userId = req.user.id;
+    const id = req.user.id;
     const { firstName, lastName, email, password } = req.body;
+    // console.log(req.user.id);
     console.log(req.user.id);
     try {
-      const user = await db.Users.findOne({
-        where: { userId }
-      });
-
-      user.dataValues = { lastName, firstName, email, password };
-      user.save();
-      res.json({ success: true });
+      const user = await db.Users.update(
+        {
+          firstName,
+          lastName,
+          email,
+          password
+        },
+        {
+          where: { id }
+        }
+      );
+      console.log(user);
+      res.redirect("/logout");
     } catch (err) {
       console.log(err);
       res.status(501).send();

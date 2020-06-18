@@ -9,7 +9,6 @@ $(document).ready(() => {
   // When the signup button is clicked, we validate the email and password are not blank
   updateForm.on("submit", event => {
     event.preventDefault();
-    console.log(emailInput);
     const userData = {
       email: emailInput.val().trim(),
       password: passwordInput.val().trim(),
@@ -56,10 +55,12 @@ $(document).ready(() => {
     $.ajax({
       url: "/update",
       type: "PUT",
-      data: JSON.stringify(dataObj)
+      data: JSON.stringify(dataObj),
+      contentType: "application/json; charset=utf-8"
     })
-      .then(() => {
+      .then(responseJSON => {
         //add if condition for err
+        console.log(responseJSON);
         window.location.replace("/login.html");
         // If there's an error, handle it by throwing up a bootstrap alert
       })

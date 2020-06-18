@@ -13,9 +13,8 @@ function toShowSellBtn() {
 }
 $("#buyBtn").click(() => {
   event.preventDefault();
-  const userId = 1;
   const quantity = parseInt($("#transactionShares").val());
-  const data = { symbol, price, quantity, userId };
+  const data = { symbol, price, quantity };
 
   $.ajax({
     url: "/api/buy",
