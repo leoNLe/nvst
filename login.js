@@ -48,7 +48,7 @@ module.exports = function(app) {
         }
       );
       console.log(user);
-      res.redirect("/logout").
+      res.redirect("/logout");
     } catch (err) {
       console.log(err);
       res.status(501).send();
