@@ -45,6 +45,8 @@ async function getEndDayBalances(userId) {
         moment(dataValues.date, "YYYY-MM-DD").format("MM-DD-YY")
       );
     });
+    dayBalances.balance.reverse();
+    dayBalances.dates.reverse();
     return dayBalances;
   } catch (err) {
     console.log(err);
