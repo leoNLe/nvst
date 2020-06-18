@@ -124,7 +124,8 @@ module.exports = function(app) {
         getHistoricalData(data.dataValues.symbol),
         getQuantity(userId, data.dataValues.symbol)
       ]);
-
+      console.log(historicalPrice);
+      console.log(curPrice);
       const priceArr = formatHistorical(historicalPrice, curPrice.data.c);
       const currentShares =
         quantityQuery.length === 0 || !quantityQuery[0].dataValues.quantity
