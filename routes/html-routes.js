@@ -154,6 +154,7 @@ module.exports = function(app) {
   });
 
   app.get("/login", (req, res) => {
+    console.log("/login");
     res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 };

@@ -45,6 +45,7 @@ $(document).ready(() => {
       contentType: "application/json; charset=utf-8"
     }).then(() => {
       // window.location.replace("/signup.html");
+      // location.reload();
       console.log("account");
       window.location.replace("/login");
     });
@@ -60,14 +61,15 @@ $(document).ready(() => {
     };
     $.ajax({
       url: "/update",
-      type: "PUT",
+      type: "POST",
       data: JSON.stringify(dataObj),
       contentType: "application/json; charset=utf-8"
     })
-      .then(() => {
+      .done(() => {
         //add if condition for err
         // If there's an error, handle it by throwing up a bootstrap alert
         window.location.replace("/login");
+        // location.reload();
       })
       .catch(handleLoginErr);
   }
