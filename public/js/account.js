@@ -5,7 +5,7 @@ $(document).ready(() => {
   const passwordInput = $("#password-input");
   const fName = $("#fname");
   const lName = $("#lname");
-
+  const delBtn = $(".delBtn");
   // When the signup button is clicked, we validate the email and password are not blank
   updateForm.on("submit", event => {
     event.preventDefault();
@@ -37,15 +37,21 @@ $(document).ready(() => {
     lName.val("");
   });
 
+  delBtn.on("click", event => {
+    event.preventDefault();
+    $.ajax({
+      url: "/api/delete",
+      type: "DELETE",
+      contentType: "application/json; charset=utf-8"
+    }).then(() => {
+      // window.location.replace("/signup.html");
+      console.log("account");
+      window.location.replace("/login");
+    });
+  });
   // Does a post to the signup route. If successful, we are redirected to the members page
   // Otherwise we log any errors
   function updateUser(email, password, fname, lname) {
-    // $.put("/update", {
-    //   email: email,
-    //   password: password,
-    //   firstName: fname,
-    //   lastName: lname
-    // }
     const dataObj = {
       email: email,
       password: password,
@@ -58,11 +64,10 @@ $(document).ready(() => {
       data: JSON.stringify(dataObj),
       contentType: "application/json; charset=utf-8"
     })
-      .then(responseJSON => {
+      .then(() => {
         //add if condition for err
-        console.log(responseJSON);
-        window.location.replace("/login.html");
         // If there's an error, handle it by throwing up a bootstrap alert
+        window.location.replace("/portfolio");
       })
       .catch(handleLoginErr);
   }

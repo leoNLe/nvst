@@ -11,6 +11,7 @@ const { Op } = require("sequelize");
 // Requiring our custom middleware for checking if a user is logged in
 const isAuthenticated = require("../config/middleware/isAuthenticated");
 const moment = require("moment");
+const path = require("path");
 
 async function getQuantity(userId, symbol) {
   return await db.Transactions.findAll({
@@ -52,6 +53,7 @@ async function getEndDayBalances(userId) {
 
 module.exports = function(app) {
   app.get("/portfolio", isAuthenticated, async (req, res) => {
+    console.log("portfolio");
     const userId = req.user.id;
     try {
       const data = await db.Transactions.findAll({
@@ -141,5 +143,14 @@ module.exports = function(app) {
       console.log(err);
       res.status(501).send();
     }
+  });
+
+  app.get("/", (req, res) => {
+    console.log("get: => /");
+    res.sendFile(path.join(__dirname, "../public/login.html"));
+  });
+
+  app.get("/login", (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/login.html"));
   });
 };

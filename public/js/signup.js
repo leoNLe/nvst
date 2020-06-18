@@ -47,8 +47,10 @@ $(document).ready(() => {
       lastName: lname
     })
       .then(() => {
-        window.location.replace("/portfolio");
+        // window.location.replace("/portfolio");
         // If there's an error, handle it by throwing up a bootstrap alert
+        // window.location.replace("/login.html");
+        location.replace("/portfolio");
       })
       .catch(handleLoginErr);
   }
