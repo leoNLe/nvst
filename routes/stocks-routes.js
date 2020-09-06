@@ -40,6 +40,8 @@ module.exports = function(app) {
   });
 
   app.post("/api/sell", isAuthenticated, async (req, res) => {
+    console.log("*".repeat(50) + "/api/sell" + "*".repeat(50));
+    console.log(req.body);
     const userId = req.user.id;
     const { symbol, price, quantity } = req.body;
     console.log(req.body);
@@ -55,7 +57,7 @@ module.exports = function(app) {
         attributes: ["quantity"],
         where: {
           userId,
-          symbol
+          symbol: symbol.toUpperCase()
         }
       });
 
@@ -67,13 +69,13 @@ module.exports = function(app) {
       if (stocksOnHand >= quantity) {
         const result = await db.Transactions.create({
           userId,
-          symbol: symbol.toLowerCase(),
+          symbol: symbol.toUpperCase(),
           price,
           quantity: `-${quantity}`,
           buy: 0
         });
         console.log(result);
-        res.redirect(`/stock/${symbol}`);
+        res.redirect(`/stock/${symbol.toUpperCase()}`);
       } else {
         res.json({ sufficient: false, message: "Not enough stocks" });
       }
@@ -98,14 +100,14 @@ module.exports = function(app) {
       }
 
       await db.Transactions.create({
-        symbol: symbol.toLowerCase(),
+        symbol: symbol.toUpperCase(),
         price,
         quantity,
         userId,
         buy: 1
       });
 
-      res.redirect(`/stock/${symbol}`);
+      res.redirect(`/stock/${symbol.toUpperCase()}`);
     } catch (err) {
       console.log(err);
       res.status(500).send();

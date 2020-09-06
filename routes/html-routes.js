@@ -107,27 +107,28 @@ module.exports = function(app) {
   });
 
   app.get("/stock/:name", isAuthenticated, async (req, res) => {
-    const query = req.params.name;
+    console.log("*".repeat(50) + "/stock/:name" + "*".repeat(50));
+    console.log("params", req.params);
+    const symbol = req.params.name;
     const userId = req.user.id;
     try {
       const data = await db.Stocks.findOne({
         where: {
-          symbol: query.toUpperCase()
+          symbol: symbol.toUpperCase()
         }
       });
       if (!data) {
         console.log("found nothing send to no company page found");
         res.redirect("/portfolio");
       }
-
+      console.log("data ", data);
       //Call 2 api for historical data and current price;
       const [curPrice, historicalPrice, quantityQuery] = await Promise.all([
         getQuotes(data.dataValues.symbol),
         getHistoricalData(data.dataValues.symbol),
         getQuantity(userId, data.dataValues.symbol)
       ]);
-      console.log(historicalPrice);
-      console.log(curPrice);
+
       const priceArr = formatHistorical(historicalPrice, curPrice.data.c);
       const currentShares =
         quantityQuery.length === 0 || !quantityQuery[0].dataValues.quantity
