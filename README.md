@@ -18,9 +18,15 @@ Mock investing application created using Node, Express, MySQL, and Handlebars.  
 ## Usage
 User will be able to create an account and log in with those credentials
 
+![](./nvst-signup.gif)
+
 User is able to view the over view of their portfolio and search for a stock using sticker symbol
 
-On the individual stock page, users see the price history, buy and sell the stock.  
+![](./nvst-search.gif)
+
+On the individual stock page, users see the price history, buy and sell the stock.
+
+![](./nvst-transaction.gif)
 
 ## Questions 
 If you have any questions about the repo, open the issue or contact [LeoNLe](https://github.com/leoNle) directly at lnle125@gmail.com
